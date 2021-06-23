@@ -20,10 +20,16 @@ functions = ClientFunctions()
 client = Client()
 
 
+def test_runs():
+    buy = functions.buy_price('ETH')
+    # buy = functions.buy_price('ETH')
+    return buy
+
+
 if __name__ == "__main__":
-    wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products='ETH-USD', channels=['ticker'])
-    wsClient.start()
-    
+    # wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products='ETH-USD', channels=['ticker'])
+    # wsClient.start()
+    print(test_runs())
             
             
         

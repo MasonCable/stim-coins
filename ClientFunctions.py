@@ -38,30 +38,36 @@ class ClientFunctions(Client):
     def most_recent_buy(self, currency):
         completedOrders = self.client.orders('done')
         product = "{}-USD".format(currency)
-
+        
         for i in completedOrders:
-            if i['product_id'] == product and i['side'] == 'buy':
-                return i
+            try:
+                if i['product_id'] == product and i['side'] == 'buy':
+                    return i
+            except:
+                return completedOrders
+            
+        
     
     # Returns the most recent sell for a given currency
     def most_recent_sell(self,currency):
         completedOrders = self.client.orders('done')
         product = "{}-USD".format(currency)
 
-        for i in completedOrders:
-            if i['product_id'] == product and i['side'] == 'sell':
-                return i
+        try:
+            for i in completedOrders:
+                if i['product_id'] == product and i['side'] == 'sell':
+                    return i
+        except:
+            return completedOrders
     
     # Get latest buy price for a currency
     def buy_price(self, currency):
         buy = self.most_recent_buy(currency)
         
-        if buy and not self.most_recent_sell(currency):
-            cost = round(float(buy['funds']), 2)
-            size = round(float(buy['filled_size']), 7)            
-            buyPrice = round(cost/size, 2)
-
-            return buyPrice
+        try:
+            return buy['price']
+        except:
+            return buy            
 
         
             
