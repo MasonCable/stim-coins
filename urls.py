@@ -72,7 +72,7 @@ def get_product_trades(product_id):
 
 
 def get_historic_trades(product_id, start, end, timeslice):
-    return 'https://api.pro.coinbase.com/products/{0}/candles?start={1}&end={2}&grandularity={3}'.format(product_id, start, end, timeslice)
+    return 'https://api.pro.coinbase.com/products/{0}/candles?start={1}&end={2}&granularity={3}'.format(product_id, start, end, timeslice)
 
 def get_24hr_stats(product_id):
     return 'https://api.pro.coinbase.com/products/{0}/stats'.format(product_id)

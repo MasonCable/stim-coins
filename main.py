@@ -21,7 +21,7 @@ client = Client()
 
 
 def test_runs():
-    buy = functions.buy_price('ETH')
+    buy = functions.buy_price('DOGE')
     # buy = functions.buy_price('ETH')
     return buy
 
