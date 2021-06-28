@@ -67,7 +67,15 @@ class ClientFunctions(Client):
         try:
             return buy['price']
         except:
-            return buy            
+            try:                
+                cost = round(float(buy['funds']), 2)
+                size = round(float(buy['filled_size']), 7)            
+                buyPrice = round(cost/size, 2)
+
+                return buyPrice
+
+            except:
+                return buy
 
         
             
