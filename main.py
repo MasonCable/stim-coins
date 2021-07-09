@@ -3,6 +3,7 @@ from argparse import ArgumentParser
 from CoinbaseClient import Client
 from ClientFunctions import ClientFunctions
 from PriceChangeBot import PriceChangeBot
+from SendMail import SendMail
 import openpyxl
 from WebsocketClient import WebsocketClient
 
@@ -20,16 +21,21 @@ functions = ClientFunctions()
 client = Client()
 
 
-def test_runs():
+def test_functions():
     buy = functions.buy_price('DOGE')
-    # buy = functions.buy_price('ETH')
     return buy
+
+def test_email():
+    toList = ['mason.cable@protonmail.com']
+    mailer = SendMail(toList)
+
+    return mailer.send_welcome_email()
 
 
 if __name__ == "__main__":
     # wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products='ETH-USD', channels=['ticker'])
     # wsClient.start()
-    print(test_runs())
+    test_email()
             
             
         
