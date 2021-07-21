@@ -3,7 +3,7 @@ from CoinbaseClient import Client
 from SendMail import SendMail
 
 
-class PriceChangeBot:
+class Bot:
     def __init__(self, currency, price):
         self.client = Client()
         self.currency = currency

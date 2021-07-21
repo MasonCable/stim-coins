@@ -2,7 +2,7 @@ import time, requests
 from argparse import ArgumentParser
 from CoinbaseClient import Client
 from ClientFunctions import ClientFunctions
-from PriceChangeBot import PriceChangeBot
+from Bot import Bot
 from SendMail import SendMail
 import openpyxl
 from WebsocketClient import WebsocketClient
@@ -33,9 +33,9 @@ def test_email():
 
 
 if __name__ == "__main__":
-    # wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products='ETH-USD', channels=['ticker'])
-    # wsClient.start()
-    test_email()
+    wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products='ETH-USD', channels=['ticker'])
+    wsClient.start()
+    # test_email()
             
             
         

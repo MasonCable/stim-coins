@@ -16,7 +16,9 @@ from websocket import create_connection, WebSocketConnectionClosedException
 from pymongo import MongoClient
 # from cbpro.cbpro_auth import get_auth_headers
 from CoinbaseClient import get_auth_headers, CBAuth
+from helpers.errors import ip_error
 from config.creds import *
+from Bot import Bot
 
 
 class WebsocketClient(object):
@@ -135,7 +137,14 @@ class WebsocketClient(object):
     def on_message(self, msg):
         if self.should_print:
             # This is where we handle the data
-            print(msg)
+            dataStream = ip_error(msg)
+            if type(dataStream) is str:
+                print(dataStream)
+                self.on_close()
+            else:
+                print(dataStream)
+                
+
             
         if self.mongo_collection:  # dump JSON to given mongo collection
             self.mongo_collection.insert_one(msg)
@@ -155,7 +164,7 @@ if __name__ == "__main__":
     class MyWebsocketClient(cbpro.WebsocketClient):
         def on_open(self):
             self.url = "wss://ws-feed.pro.coinbase.com/"
-            self.products = ["BTC-USD", "ETH-USD"]
+            self.products = ["BTC-USD", "ETH-USD", "DOGE-USD"]
             self.message_count = 0
             print("Let's count the messages!")
 
