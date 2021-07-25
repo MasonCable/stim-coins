@@ -19,7 +19,7 @@ args = parser.parse_args()
 
 functions = ClientFunctions()
 client = Client()
-
+productList = ['ETH-USD', 'BTC-USD', 'DOGE-USD']
 
 def test_functions():
     buy = functions.buy_price('DOGE')
@@ -33,7 +33,7 @@ def test_email():
 
 
 if __name__ == "__main__":
-    wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products='ETH-USD', channels=['ticker'])
+    wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products=productList, channels=['ticker'])
     wsClient.start()
     # test_email()
             

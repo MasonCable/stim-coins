@@ -51,6 +51,7 @@ class WebsocketClient(object):
         self.api_passphrase = PASSPHRASE
         self.should_print = should_print
         self.mongo_collection = mongo_collection
+        
 
     def start(self):
         def _go():
@@ -135,6 +136,7 @@ class WebsocketClient(object):
             print("\n-- Socket Closed --")
 
     def on_message(self, msg):
+        
         if self.should_print:
             # This is where we handle the data
             dataStream = ip_error(msg)
@@ -142,7 +144,17 @@ class WebsocketClient(object):
                 print(dataStream)
                 self.on_close()
             else:
-                print(dataStream)
+                bot = Bot(dataStream)
+                # Send data to bot for analyzation
+                bot.analyze()
+                print(dataStream, '\n')
+                if dataStream['type'] == 'subscriptions':
+                    pass
+                else:
+                    time.sleep(4)
+                    
+
+
                 
 
             
