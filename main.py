@@ -33,9 +33,9 @@ def test_email():
 
 
 if __name__ == "__main__":
-    wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products=productList, channels=['ticker'])
-    wsClient.start()
-    # test_email()
+    # wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products=productList, channels=['ticker'])
+    # wsClient.start()
+    test_email()
             
             
         
