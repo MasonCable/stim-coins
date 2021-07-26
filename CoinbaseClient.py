@@ -43,7 +43,16 @@ class Client:
         return response
     
     def account_holds(self):
-        pass
+        response = requests.get(account_url(), auth=self.auth).json()
+        allAccounts = []
+        for i in response:
+            balance = float(i['balance'])
+            if balance * 1 != 0:
+                allAccounts.append(i)
+            else:
+                pass
+
+        return allAccounts
     
     def fills(self, order_id, product_id):
         response = requests.get(get_fills(order_id, product_id), auth=self.auth)    

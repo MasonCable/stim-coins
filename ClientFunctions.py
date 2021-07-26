@@ -45,9 +45,12 @@ class ClientFunctions(Client):
                     return i
             except:
                 return completedOrders
-            
-        
+
+    #  Returns Bool
+    def does_own(self, currency):
+        pass
     
+
     # Returns the most recent sell for a given currency
     def most_recent_sell(self,currency):
         completedOrders = self.client.orders('done')

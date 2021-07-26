@@ -31,11 +31,14 @@ def test_email():
 
     return mailer.send_welcome_email()
 
+def main():
+    wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products='DOGE-USD', channels=['ticker'])
+    wsClient.start()
 
 if __name__ == "__main__":
-    # wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products=productList, channels=['ticker'])
-    # wsClient.start()
-    test_email()
+    for i in client.account_holds():
+        print("{}\n".format(i))
+    # main()
             
             
         
