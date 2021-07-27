@@ -56,6 +56,8 @@ def store_historical_data():
     
     workbook.save('reports/{}.xlsx'.format(reportName))
 
+def store_ticker_data(headers, dataObj):
+    pass
 
-store_historical_data()
+# store_historical_data()
 
