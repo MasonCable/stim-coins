@@ -5,6 +5,12 @@ class ClientFunctions(Client):
     def __init__(self):
         self.client = Client()
 
+    def isHolding(self, currency):
+        holds = self.client.account_holds()
+        for i in holds:
+            if i['currency'] == currency:
+                return True
+        return False
 
     # CB does not offer a watchlit route in pro so we get a list based off of all previos orders
     def watchlist(self):

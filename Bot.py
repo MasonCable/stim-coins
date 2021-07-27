@@ -1,13 +1,15 @@
 import requests, time
-from CoinbaseClient import Client
 from SendMail import SendMail
 from ClientFunctions import ClientFunctions
+from CoinbaseClient import Client
 
 
 class Bot:
     def __init__(self, dataObject):
         self.dataObject = dataObject
         self.functions = ClientFunctions()
+        self.client = Client()
+        
 
     
     def analyze(self):
@@ -30,8 +32,18 @@ class Bot:
              'last_size': '0.00104721'} 
         """
         currency = self.dataObject['product_id']
+    
+        
         transactionData = self.most_recent_transactions(currency)
         
+        # Is the current currency being held @Bool
+        if self.functions.isHolding(currency):
+            # Get the current ammount being held and the cost basis
+            pass
+        else:
+            # Was there a previous sell ? When?
+            pass
+            
         # Check current holdings for currency X
             # check if I own currency
                 # If I own currency check my average buy price

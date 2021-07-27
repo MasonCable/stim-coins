@@ -35,9 +35,11 @@ def main():
     wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products='DOGE-USD', channels=['ticker'])
     wsClient.start()
 
+def test():
+    pass
+
 if __name__ == "__main__":
-    for i in client.account_holds():
-        print("{}\n".format(i))
+    test()
     # main()
             
             

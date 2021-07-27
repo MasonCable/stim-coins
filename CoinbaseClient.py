@@ -42,6 +42,10 @@ class Client:
         response = requests.get(account_url(), auth=self.auth).json()    
         return response
     
+    def account_from_id(self, accountId):
+        response = requests.get(account_from_id_url(account_id), auth=self.auth).json()
+        return response
+
     def account_holds(self):
         response = requests.get(account_url(), auth=self.auth).json()
         allAccounts = []
