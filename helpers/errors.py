@@ -12,6 +12,8 @@ def ip_error(dataStream):
             # return "Please check IP configuration"
             return message['message']
 
+def no_data():
+    return "There is no data being returned"
 
 def handle_unknown_error(message):
     return "Unkown Error"

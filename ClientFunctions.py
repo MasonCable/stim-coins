@@ -1,6 +1,6 @@
 import time, requests, math
 from CoinbaseClient import Client
-
+from helpers.errors import no_data
 class ClientFunctions(Client):
     def __init__(self):
         self.client = Client()
@@ -52,11 +52,20 @@ class ClientFunctions(Client):
             except:
                 return completedOrders
 
-    #  Returns Bool
-    def does_own(self, currency):
-        pass
-    
+    def holding_data(self, currency):
+        accountId=""
+        for i in self.client.account_holds():
+            if currency == i['currency']:
+                accountId = i['account_id']
+        
+        returnData = self.client.account_from_id(accountId)
 
+        if returnData == None:
+            return no_data()
+        
+        return returnData
+
+    
     # Returns the most recent sell for a given currency
     def most_recent_sell(self,currency):
         completedOrders = self.client.orders('done')

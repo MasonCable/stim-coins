@@ -32,14 +32,14 @@ class Bot:
              'last_size': '0.00104721'} 
         """
         currency = self.dataObject['product_id']
-    
+        
         
         transactionData = self.most_recent_transactions(currency)
         
         # Is the current currency being held @Bool
         if self.functions.isHolding(currency):
             # Get the current ammount being held and the cost basis
-            pass
+            holdingData = self.functions.holding_data(currency)
         else:
             # Was there a previous sell ? When?
             pass
