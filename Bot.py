@@ -1,4 +1,5 @@
 import requests, time
+import openpyxl
 from SendMail import SendMail
 from ClientFunctions import ClientFunctions
 from CoinbaseClient import Client
