@@ -47,7 +47,7 @@ def main():
     wsClient.start()
 
 def test():
-    filenName = 'data/ticker.xlsx'
+    pass
     
 
 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     elif args.test:
         test()
     else:
-        print("Please specify how you want to run this script")
+        print("Please specify how you want to run this script\n -m for the main loop\n -t for the test() function")
     
             
             

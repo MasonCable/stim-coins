@@ -151,7 +151,7 @@ class WebsocketClient(object):
                     pass
                 else:
                     bot.analyze()
-                    time.sleep(2)
+                    time.sleep(3)
                     
 
 

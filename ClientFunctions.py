@@ -8,7 +8,9 @@ class ClientFunctions(Client):
     def isHolding(self, currency):
         holds = self.client.account_holds()
         for i in holds:
-            if i['currency'] == currency:
+            # get just the main currency
+            baseCurrency = currency[:currency.index('-')]
+            if i['currency'] == baseCurrency:
                 return True
         return False
 

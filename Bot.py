@@ -10,6 +10,7 @@ class Bot:
         self.dataObject = dataObject
         self.functions = ClientFunctions()
         self.client = Client()
+        self.coinsOwned = []
         
 
     
@@ -40,11 +41,11 @@ class Bot:
         # Is the current currency being held @Bool
         if self.functions.isHolding(currency):
             # Get the current ammount being held and the cost basis
-            holdingData = self.functions.holding_data(currency)
+            # holdingData = self.functions.holding_data(currency)
+            print('\n WE OWN THIS SHIT')
         else:
             # Was there a previous sell ? When?
-            
-            pass
+            print('\n WE DO NOT OWN THIS SHIT')
             
         # Check current holdings for currency X
             # check if I own currency
