@@ -12,6 +12,8 @@ parser = ArgumentParser(description="This service is only for smart notification
 
 parser.add_argument("-nl", "--notification-list", help="List of users that will recieve email notifications for price changes. Seperate email addresses with commas.")
 parser.add_argument("-dr", "--daily-report", help="Email users a daily report of all price changes.")
+parser.add_argument("-m", "--main", action='store_true', help="Run the main program loop")
+parser.add_argument("-t", "--test", action='store_true',help="Run whateber is in the test() function")
 
 
 args = parser.parse_args()
@@ -46,10 +48,17 @@ def main():
 
 def test():
     filenName = 'data/ticker.xlsx'
+    
+
 
 if __name__ == "__main__":
-    test()
-    # main()
+    if args.main:
+        main()
+    elif args.test:
+        test()
+    else:
+        print("Please specify how you want to run this script")
+    
             
             
         
