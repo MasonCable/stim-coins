@@ -146,12 +146,13 @@ class WebsocketClient(object):
             else:
                 bot = Bot(dataStream)
                 # Send data to bot for analyzation
-                print(dataStream, '\n')
+                # Use for testing
+                # print(dataStream, '\n')
                 if dataStream['type'] == 'subscriptions':
-                    pass
+                    return
                 else:
                     bot.analyze()
-                    time.sleep(3)
+                    time.sleep(1)
                     
 
 

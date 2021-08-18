@@ -11,38 +11,21 @@ class Bot:
         self.functions = ClientFunctions()
         self.client = Client()
         self.coinsOwned = []
-        
+        # This is a list of dict with productId as key and price as value
+        self.averageBuyPrice = []
 
     
     def analyze(self):
         """
-                EXAMPLE RESPONSE
-            {'type': 'ticker',
-            'sequence': 27663632374,
-             'product_id': 'BTC-USD',
-             'price': '34539.98',
-             'open_24h': '34129.28',
-             'volume_24h': '8533.66530825',
-             'low_24h': '33867.85',
-             'high_24h': '34837.08',
-             'volume_30d': '324271.28515124',
-             'best_bid': '34539.98',
-             'best_ask': '34544.83',
-             'side': 'sell',
-             'time': '2021-07-25T21:53:49.012386Z',
-             'trade_id': 196254869,
-             'last_size': '0.00104721'} 
+                EXAMPLE RESPONSE            {'type': 'ticker',            'sequence': 27663632374,             'product_id': 'BTC-USD',             'price': '34539.98',             'open_24h': '34129.28',             'volume_24h': '8533.66530825',             'low_24h': '33867.85',             'high_24h': '34837.08',             'volume_30d': '324271.28515124',             'best_bid': '34539.98',             'best_ask': '34544.83',             'side': 'sell',             'time': '2021-07-25T21:53:49.012386Z',             'trade_id': 196254869,            'last_size': '0.00104721'} 
         """
         currency = self.dataObject['product_id']
         
-        
-        transactionData = self.most_recent_transactions(currency)
-        
         # Is the current currency being held @Bool
-        if self.functions.isHolding(currency):
+        if self.isHolding(currency):
             # Get the current ammount being held and the cost basis
             # holdingData = self.functions.holding_data(currency)
-            print('\n WE OWN THIS SHIT')
+            self.holding(currency)
         else:
             # Was there a previous sell ? When?
             print('\n WE DO NOT OWN THIS SHIT')
@@ -57,18 +40,26 @@ class Bot:
                 # If I dont own currency check last time sold and store previousSell
         
 
-    def find_average_ask(self, currency, timePeriod):
-        pass
+    def isHolding(self, currency):
+        if currency in self.coinsOwned:
+            return True
+        elif self.functions.isHolding(currency):
+            return True
+        else:
+            return False
 
-    def most_recent_transactions(self, currency):
-        mostRecentBuy = self.functions.most_recent_buy(currency)
-        mostRecentSell = self.functions.most_recent_sell(currency)
-        transactionData = {
-            "sell": mostRecentSell,
-            "buy": mostRecentBuy
-        }
+    def holding(self, currency):
+        self.coinsOwned.append(currency)
+        self.getAvgBuyPrice(currency)
+    
+    def getAvgBuyPrice(self, currency):
+        currencyName = currency[:currency.index('-')]
+        print(self.functions.buy_price(currencyName))
 
-        return transactionData
+
+
+
+    
     
     # This function takes in a currency object as seen in the analyze() function
         # tickerObject=Dict -> currency=Str -> storeAll -> Bool 

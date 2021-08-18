@@ -30,7 +30,7 @@ tickerData = [{'type': 'ticker', 'sequence': 344843567, 'product_id': 'DOGE-USD'
 
 functions = ClientFunctions()
 client = Client()
-productList = ['ETH-USD', 'BTC-USD', 'DOGE-USD']
+productList = ['ETH-USD', 'BTC-USD', 'DOGE-USD', 'LTC-USD']
 
 def test_functions():
     buy = functions.buy_price('DOGE')
@@ -43,11 +43,11 @@ def test_email():
     return mailer.send_welcome_email()
 
 def main():
-    wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products='DOGE-USD', channels=['ticker'])
+    wsClient = WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products=productList, channels=['ticker'])
     wsClient.start()
 
 def test():
-    pass
+    print(functions.buy_price('DOGE'))
     
 
 
