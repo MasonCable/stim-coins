@@ -1,6 +1,7 @@
-import requests, time
+import requests, time, math
 import openpyxl
 from SendMail import SendMail
+from helpers.algo import get_change
 from ClientFunctions import ClientFunctions
 from CoinbaseClient import Client
 from GenerateReport import *
@@ -21,40 +22,38 @@ class Bot:
         """
         currency = self.dataObject['product_id']
         
-        # Is the current currency being held @Bool
-        if self.isHolding(currency):
-            # Get the current ammount being held and the cost basis
-            # holdingData = self.functions.holding_data(currency)
+        if self.isHolding(currency):            
             self.holding(currency)
-        else:
-            # Was there a previous sell ? When?
-            print('\n WE DO NOT OWN THIS SHIT')
+        else:            
+            print('We do not own {} drop data for now'.format(currency))
             
-        # Check current holdings for currency X
-            # check if I own currency
-                # If I own currency check my average buy price
-                    # If current price is x% higher than average buy price
-                        # Do X
-                    # Else
-                        # Do X
-                # If I dont own currency check last time sold and store previousSell
         
-
+    # return @bool
     def isHolding(self, currency):
         if currency in self.coinsOwned:
+            self.coinsOwned.append(currency)
             return True
         elif self.functions.isHolding(currency):
+            self.coinsOwned.append(currency)
             return True
         else:
             return False
-
-    def holding(self, currency):
-        self.coinsOwned.append(currency)
-        self.getAvgBuyPrice(currency)
+    
+    # Main Function to check for what to do with an owned asset
+    def holding(self, currency):        
+        buyPrice = self.getAvgBuyPrice(currency)
+        currentPrice = self.dataObject['price']
+        # print(self.priceDifference(buyPrice))
+    
+    def priceDifference(self, buyPrice):
+        currentPrice = self.dataObject['price']
+        priceChange = get_change(float(currentPrice), buyPrice)
+        priceObject = { "current_price": currentPrice, "buy_price": buyPrice , "price_difference": priceChange }
+        return priceObject
     
     def getAvgBuyPrice(self, currency):
         currencyName = currency[:currency.index('-')]
-        print(self.functions.buy_price(currencyName))
+        return self.functions.buy_price(currencyName)
 
 
 
