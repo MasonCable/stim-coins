@@ -22,14 +22,14 @@ class Bot:
         """
         currency = self.dataObject['product_id']
         
-        if self.isHolding(currency):            
-            self.holding(currency)
+        if self.doesOwn(currency):            
+            self.isHolding(currency)
         else:            
             print('We do not own {} drop data for now'.format(currency))
             
         
     # return @bool
-    def isHolding(self, currency):
+    def doesOwn(self, currency):
         if currency in self.coinsOwned:
             self.coinsOwned.append(currency)
             return True
@@ -40,24 +40,21 @@ class Bot:
             return False
     
     # Main Function to check for what to do with an owned asset
-    def holding(self, currency):        
-        buyPrice = self.getAvgBuyPrice(currency)
+    def isHolding(self, currency): 
+        currencyName = currency[:currency.index('-')]
+        buyPrice = self.functions.buy_price(currencyName)
         currentPrice = self.dataObject['price']
-        # print(self.priceDifference(buyPrice))
-    
-    def priceDifference(self, buyPrice):
+        # self.priceDifference(buyPrice)
         currentPrice = self.dataObject['price']
         priceChange = get_change(float(currentPrice), buyPrice)
         priceObject = { "current_price": currentPrice, "buy_price": buyPrice , "price_difference": priceChange }
-        return priceObject
+
+        self.potentialSell(priceObject) 
     
-    def getAvgBuyPrice(self, currency):
-        currencyName = currency[:currency.index('-')]
-        return self.functions.buy_price(currencyName)
+    def potentialSell(self, priceObject):
+        print(priceObject)
 
-
-
-
+    
     
     
     # This function takes in a currency object as seen in the analyze() function
