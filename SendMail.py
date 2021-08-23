@@ -12,13 +12,14 @@ class SendMail():
         
 
     def send_price_change_alert(self, coinData):
+        
         return requests.post(
             self.alertUrl,
             auth=("api", MAILGUN_APIKEY),
             data={"from": self.alertFromAddress,
                   "to": self.toList,
                   "subject": "{} PRICE NOTIFICATION".format(coinData['currency']),
-                  "text": "{0} has reached the price of {1}, would you like to place a buy or sell order?".format(coinData['currency'], coinData['notification_price'])
+                  "text": "{0} has gone {1} by %{2}".format(coinData['currency'], coinData['up_or_down'], coinData['price_difference'])
 
             })
 
