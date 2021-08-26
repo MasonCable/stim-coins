@@ -152,8 +152,9 @@ class WebsocketClient(object):
                     return
                 else:
                     # print(type(dataStream['price']), '\n')
+                    
                     bot.analyze()
-                    time.sleep(1)
+                    # time.sleep(1)
                     
 
 

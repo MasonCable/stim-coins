@@ -25,7 +25,7 @@ class Bot:
         if self.doesOwn(currency):            
             self.isHolding(currency)
         else:            
-            print('We do not own {} drop data for now'.format(currency))
+            print('We do not own {} \n drop data for now'.format(currency))
             
         
     # return @bool
@@ -64,7 +64,7 @@ class Bot:
         print(priceObject)
         if roundedPriceDiff > 6:
             SendMail(['mason.cable@protonmail.com']).send_price_change_alert(coinData)
-            # print("Email Sent")
+            print("Email Sent")
         
 
     
