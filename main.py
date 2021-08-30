@@ -47,7 +47,8 @@ def main():
     wsClient.start()
 
 def test():
-    print(functions.buy_price('DOGE'))
+    for i in functions.open_accounts():
+        print("{}\n".format(i))
     
 
 

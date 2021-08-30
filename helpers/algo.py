@@ -1,12 +1,11 @@
 # Returns change in prices with neg and positive
-def get_change(current, previous):
-    
-    if current == previous:
+def get_change(currentPrice, buyPrice):
+    if currentPrice == buyPrice:
         return 0.0
 
-    priceChange = (current - previous) / ((current + previous) / 2) * 100
+    priceChange = (currentPrice - buyPrice) / ((currentPrice + buyPrice) / 2) * 100
 
-    if current > previous:
-        return priceChange
-    else:
+    if buyPrice < currentPrice:
         return priceChange * -1
+    else:
+        return priceChange

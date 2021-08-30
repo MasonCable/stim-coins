@@ -27,6 +27,7 @@ class Bot:
         else:            
             print('We do not own {} \n drop data for now'.format(currency))
             
+            
         
     # return @bool
     def doesOwn(self, currency):
@@ -47,24 +48,24 @@ class Bot:
         # self.priceDifference(buyPrice)
         currentPrice = self.dataObject['price']
         priceChange = get_change(float(currentPrice), buyPrice)
-        priceObject = { "current_price": currentPrice, "buy_price": buyPrice , "price_difference": priceChange, "currency": currencyName }
+        isDown=''
+        if priceChange * 1 >= 1:
+            isDown='UP'
+        else: 
+            isDown='DOWN'
+        priceObject = { "current_price": currentPrice, "buy_price": buyPrice , "price_difference": priceChange, "currency": currencyName, "is_down": isDown }
         
         self.potentialSell(priceObject) 
     
     def potentialSell(self, priceObject):
         priceDifference = priceObject['price_difference']
         roundedPriceDiff = round(priceDifference, 2)
-        isDown=''
-        if priceDifference * 1 >= 1:
-            isDown = 'UP'
-        else:
-            isDown = 'DOWN'
-        # isDown = 'UP' if priceDifference * 1 >= 1 else isDown = 'DOWN'
+        isDown= priceObject['is_down']
         coinData = { "currency": priceObject['currency'] ,"up_or_down": isDown, "price_difference": roundedPriceDiff }
         print(priceObject)
-        if roundedPriceDiff > 6:
-            SendMail(['mason.cable@protonmail.com']).send_price_change_alert(coinData)
-            print("Email Sent")
+        # if roundedPriceDiff > 6:
+        #     SendMail(['mason.cable@protonmail.com']).send_price_change_alert(coinData)
+        #     print("Email Sent")
         
 
     
