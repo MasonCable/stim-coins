@@ -5,7 +5,7 @@ def get_change(currentPrice, buyPrice):
 
     priceChange = (currentPrice - buyPrice) / ((currentPrice + buyPrice) / 2) * 100
 
-    if buyPrice < currentPrice:
+    if buyPrice > currentPrice:
         return priceChange * -1
     else:
         return priceChange

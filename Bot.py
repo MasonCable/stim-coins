@@ -11,7 +11,7 @@ class Bot:
         self.dataObject = dataObject
         self.functions = ClientFunctions()
         self.client = Client()
-        self.coinsOwned = []
+        
         # This is a list of dict with productId as key and price as value
         self.averageBuyPrice = []
 
@@ -22,24 +22,15 @@ class Bot:
         """
         currency = self.dataObject['product_id']
         
-        if self.doesOwn(currency):            
-            self.isHolding(currency)
+        if self.functions.isHolding(currency):            
+            self.isHolding(currency)            
         else:            
-            print('We do not own {} \n drop data for now'.format(currency))
+            print('We do not own {} ----------- drop data for now'.format(currency))
             
             
         
-    # return @bool
-    def doesOwn(self, currency):
-        if currency in self.coinsOwned:
-            self.coinsOwned.append(currency)
-            return True
-        elif self.functions.isHolding(currency):
-            self.coinsOwned.append(currency)
-            return True
-        else:
-            return False
     
+
     # Main Function to check for what to do with an owned asset
     def isHolding(self, currency): 
         currencyName = currency[:currency.index('-')]
@@ -47,9 +38,10 @@ class Bot:
         currentPrice = self.dataObject['price']
         # self.priceDifference(buyPrice)
         currentPrice = self.dataObject['price']
-        priceChange = get_change(float(currentPrice), buyPrice)
+        priceChange = get_change(float(currentPrice), float(buyPrice))
+        
         isDown=''
-        if priceChange * 1 >= 1:
+        if priceChange > 0.0:
             isDown='UP'
         else: 
             isDown='DOWN'
@@ -69,6 +61,8 @@ class Bot:
         
 
     
+    def createBuySignal(self, coinData):
+        pass
     
     
     # This function takes in a currency object as seen in the analyze() function
