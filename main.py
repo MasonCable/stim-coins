@@ -47,10 +47,9 @@ def main():
     wsClient.start()
 
 def test():
-    if -3 > 0:
-        print("positive")
-    else:
-        print("Negative")
+    print(functions.open_accounts())
+    
+
         
     
 
