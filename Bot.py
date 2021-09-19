@@ -28,7 +28,9 @@ class Bot:
             print('We do not own {} ----------- drop data for now'.format(currency))
             
             
-        
+    def quick_check(self, currency):
+        # Check and see if we need to run any further code if parameters are met
+        pass
     
 
     # Main Function to check for what to do with an owned asset
